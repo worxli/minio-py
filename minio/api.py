@@ -273,7 +273,7 @@ class Minio(object):
                                       headers=headers)
 
         if response.status != 200:
-            raise ResponseError(response, method, bucket_name).get_exception()
+            raise ResponseError(response, method, bucket_name)
 
         self._set_bucket_region(bucket_name, region=location)
 
@@ -314,7 +314,7 @@ class Minio(object):
                       self._trace_output_stream)
 
         if response.status != 200:
-            raise ResponseError(response, method).get_exception()
+            raise ResponseError(response, method)
         try:
             return parse_list_buckets(response.data)
         except InvalidXMLError:
@@ -1731,7 +1731,7 @@ class Minio(object):
                       self._trace_output_stream)
 
         if response.status != 200:
-            raise ResponseError(response, method, bucket_name).get_exception()
+            raise ResponseError(response, method, bucket_name)
 
         location = parse_location_constraint(response.data)
         # location is empty for 'US standard region'
@@ -1803,7 +1803,7 @@ class Minio(object):
                 raise ResponseError(response,
                                     method,
                                     bucket_name,
-                                    object_name).get_exception()
+                                    object_name)
             else:
                 raise ValueError('Unsupported method returned'
                                  ' error: {0}'.format(response.status))
